@@ -7,13 +7,14 @@ Timer <- R6::R6Class(
     long_break_time = NULL,
     sound           = NULL,
     sound_enabled   = NULL,
+    start_color     = NULL,
+    end_color       = NULL,
     break_time_list = numeric(),
     target_time     = NULL,
     elapsed_time    = -1,
+    time_expired    = FALSE,
     status          = NULL,
     color           = NULL,
-    start_color     = NULL,
-    end_color       = NULL,
     cli_id          = NULL,
     message         = "",
     key             = "",
@@ -46,8 +47,7 @@ Timer <- R6::R6Class(
     },
 
     start = function(status = c("work", "break")) {
-      self$start_time <- Sys.time()
-      self$color      <- self$start_color
+      self$reset_timer()
 
       if (status == "work") {
         self$status <- "Working"
@@ -83,7 +83,8 @@ Timer <- R6::R6Class(
           self$elapsed_time <- elapsed_time
 
           if (self$elapsed_time >= self$target_time) {
-            if (identical(self$color, self$start_color)) {
+            if (!self$time_expired) {
+              self$time_expired <- TRUE
               # After time has expired, turn timer red and ding
               self$color <- self$end_color
               if (self$sound_enabled) beepr::beep(self$sound)
@@ -126,7 +127,7 @@ Timer <- R6::R6Class(
           } else {
             return(self$start("work"))
           },
-          r = self$restart(),
+          r = self$reset_timer(),
           escape = ,
           q = self$quit()
         )
@@ -163,9 +164,10 @@ Timer <- R6::R6Class(
       }
     },
 
-    restart = function() {
-      self$start_time <- Sys.time()
-      self$color      <- self$start_color
+    reset_timer = function() {
+      self$start_time   <- Sys.time()
+      self$time_expired <- FALSE
+      self$color        <- self$start_color
     },
 
     quit = function(env = rlang::caller_env()) {
