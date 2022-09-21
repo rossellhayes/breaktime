@@ -48,8 +48,12 @@ timer <- function(
   start_color = "green",
   end_color = "red"
 ) {
-  invisible(
-    Timer$new(work_time, break_time, long_break_time, start_color, end_color)
+  new_timer(
+    work_time = work_time,
+    break_time = break_time,
+    long_break_time = long_break_time,
+    start_color = start_color,
+    end_color = end_color
   )
 }
 
@@ -62,7 +66,15 @@ pomodoro <- function(
   start_color = "green",
   end_color = "red"
 ) {
-  invisible(
-    Timer$new(work_time, break_time, long_break_time, start_color, end_color)
+  new_timer(
+    work_time = work_time,
+    break_time = break_time,
+    long_break_time = long_break_time,
+    start_color = start_color,
+    end_color = end_color
   )
+}
+
+new_timer <- function(...) {
+  invisible(Timer$new(...))
 }
