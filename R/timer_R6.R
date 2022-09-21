@@ -51,26 +51,21 @@ Timer <- R6::R6Class(
 
       if (status == "work") {
         self$status <- "Working"
-        self$set_target_time(self$work_time)
+        self$target_time <- ceiling(self$work_time)
       } else {
         self$status <- "On break"
-        self$set_target_time(self$break_time %||% round(self$elapsed_time / 5))
+        self$target_time <- ceiling(self$break_time %||% (self$elapsed_time / 5))
         self$break_time_list <- append(self$break_time_list, self$target_time, 0)
 
         if (length(self$break_time_list) %% 4 == 0) {
           self$status <- "Long break"
-          self$set_target_time(
+          self$target_time <- ceiling(
             self$long_break_time %||% sum(self$break_time_list[1:4])
           )
         }
       }
 
       self$count()
-    },
-
-    set_target_time = function(time) {
-      # Target time is never less than one second
-      self$target_time <- max(time, 1)
     },
 
     count = function() {
