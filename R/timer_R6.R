@@ -5,6 +5,8 @@ Timer <- R6::R6Class(
     work_time       = NULL,
     break_time      = NULL,
     long_break_time = NULL,
+    sound           = NULL,
+    sound_enabled   = NULL,
     break_time_list = numeric(),
     target_time     = NULL,
     elapsed_time    = -1,
@@ -18,14 +20,21 @@ Timer <- R6::R6Class(
     command_keys    = c("b", "p", "r", "q", "escape"),
 
     initialize = function(
-      work_time = 25, break_time = NULL, long_break_time = NULL,
-      start_color = "green", end_color = "red"
+      work_time = NULL,
+      break_time = NULL,
+      long_break_time = NULL,
+      sound = "ping",
+      start_color = "green",
+      end_color = "red"
     ) {
       check_keypress_support()
 
       self$work_time       <- as.timer_duration((work_time * 60) %||% Inf)
       self$break_time      <- as.timer_duration(break_time * 60)
       self$long_break_time <- as.timer_duration(long_break_time * 60)
+
+      self$sound         <- sound
+      self$sound_enabled <- !is.null(sound)
 
       self$start_color <- cli::make_ansi_style(start_color)
       self$end_color   <- cli::make_ansi_style(end_color)
@@ -77,14 +86,15 @@ Timer <- R6::R6Class(
             if (identical(self$color, self$start_color)) {
               # After time has expired, turn timer red and ding
               self$color <- self$end_color
-              beepr::beep()
+              if (self$sound_enabled) beepr::beep(self$sound)
             } else if (
+              self$sound_enabled &&
               (self$elapsed_time - self$target_time) %%
               ceiling(self$target_time / 5) == 0
             ) {
               # After time has expired, ding again each time 1/5 of the target
               # time has passed (e.g. after 25 min, ding every subsequent 5 min)
-              beepr::beep()
+              beepr::beep(self$sound)
             }
           }
 

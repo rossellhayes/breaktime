@@ -33,6 +33,16 @@
 #'   Long breaks occur every fourth break.
 #'   If [`NULL`], the long break time will be one-fifth of the length of the
 #'   previous working session, plus the length of the previous three short breaks.
+#' @param sound `[numeric(1)]` or `[character(1)]`
+#'   The sound played by [beepr::beep()] when a session ends.
+#'   See [beepr::beep()] for possible values.
+#'
+#'   If [`NULL`], sound is disabled.
+#'
+#'   If you do not interact with `breaktime` after a session has ended,
+#'   the sound will play again each time one-fifth of the target time passes
+#'   (for example, if a session lasts 25 minutes,
+#'   a reminder sound will play every 5 minutes after the session ends).
 #' @param start_color,end_color `[character(1)]`\cr
 #'   Colors used to display the time.
 #'   The time is displayed in `start_color` when there is time remaining in the
@@ -45,6 +55,7 @@ timer <- function(
   work_time = 25,
   break_time = NULL,
   long_break_time = NULL,
+  sound = "ping",
   start_color = "green",
   end_color = "red"
 ) {
@@ -52,6 +63,7 @@ timer <- function(
     work_time = work_time,
     break_time = break_time,
     long_break_time = long_break_time,
+    sound = sound,
     start_color = start_color,
     end_color = end_color
   )
@@ -63,6 +75,7 @@ pomodoro <- function(
   work_time = 25,
   break_time = 5,
   long_break_time = 20,
+  sound = "ping",
   start_color = "green",
   end_color = "red"
 ) {
@@ -70,6 +83,7 @@ pomodoro <- function(
     work_time = work_time,
     break_time = break_time,
     long_break_time = long_break_time,
+    sound = sound,
     start_color = start_color,
     end_color = end_color
   )

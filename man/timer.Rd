@@ -15,6 +15,7 @@ timer(
   work_time = 25,
   break_time = NULL,
   long_break_time = NULL,
+  sound = "ping",
   start_color = "green",
   end_color = "red"
 )
@@ -23,6 +24,7 @@ pomodoro(
   work_time = 25,
   break_time = 5,
   long_break_time = 20,
+  sound = "ping",
   start_color = "green",
   end_color = "red"
 )
@@ -43,6 +45,17 @@ Long breaks occur every fourth break.
 If \code{\link{NULL}}, the long break time will be one-fifth of the length of the
 previous working session, plus the length of the previous three short breaks.}
 
+\item{sound}{\verb{[numeric(1)]} or \verb{[character(1)]}
+The sound played by \code{\link[beepr:beep]{beepr::beep()}} when a session ends.
+See \code{\link[beepr:beep]{beepr::beep()}} for possible values.
+
+If \code{\link{NULL}}, sound is disabled.
+
+If you do not interact with \code{breaktime} after a session has ended,
+the sound will play again each time one-fifth of the target time passes
+(for example, if a session lasts 25 minutes,
+a reminder sound will play every 5 minutes after the session ends).}
+
 \item{start_color, end_color}{\verb{[character(1)]}\cr
 Colors used to display the time.
 The time is displayed in \code{start_color} when there is time remaining in the
@@ -60,6 +73,8 @@ You may consider running it from the command line in a new terminal window with
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{R -e "breaktime::timer()"
 }\if{html}{\out{</div>}}
+
+The default arguments to \code{timer()} match those recommended by the
 
 \code{pomodoro()} is an alias with defaults that match the recommended fixed times
 of the \href{https://francescocirillo.com/pages/pomodoro-technique}{Pomodoro Technique}:
