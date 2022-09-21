@@ -4,6 +4,12 @@
 \alias{timer}
 \alias{pomodoro}
 \title{Start a timer}
+\source{
+Inspired by the \href{https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191}{Flowtime Technique}
+by \href{https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191}{Urgent Pigeon}
+and the \href{https://francescocirillo.com/pages/pomodoro-technique}{Pomodoro Technique}
+by \href{https://francescocirillo.com/pages/francesco-cirillo}{Francesco Cirillo}.
+}
 \usage{
 timer(
   work_time = 25,
@@ -47,10 +53,13 @@ Color specifications are handled by \code{\link[cli:make_ansi_style]{cli::make_a
 Invisibly returns an \link[R6:R6Class]{R6} object of class \code{Timer}
 }
 \description{
-Inspired by the \href{https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191}{Flowtime Technique}
-by \href{https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191}{Urgent Pigeon}
-and the \href{https://francescocirillo.com/pages/pomodoro-technique}{Pomodoro Technique}
-by \href{https://francescocirillo.com/pages/francesco-cirillo}{Francesco Cirillo}.
+\code{timer()} creates an interactive timer in your R session.
+I recommend you don't use \code{timer()} in your current R session,
+as it will block the console.
+You may consider running it from the command line in a new terminal window with
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{R -e "breaktime::timer()"
+}\if{html}{\out{</div>}}
 
 \code{pomodoro()} is an alias with defaults that match the recommended fixed times
 of the \href{https://francescocirillo.com/pages/pomodoro-technique}{Pomodoro Technique}:

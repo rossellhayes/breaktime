@@ -1,14 +1,25 @@
 #' Start a timer
 #'
 #' @description
-#' Inspired by the [Flowtime Technique](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
-#' by [Urgent Pigeon](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
-#' and the [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique)
-#' by [Francesco Cirillo](https://francescocirillo.com/pages/francesco-cirillo).
+#' `timer()` creates an interactive timer in your R session.
+#' I recommend you don't use `timer()` in your current R session,
+#' as it will block the console.
+#' You may consider running it from the command line in a new terminal window with
+#' ```
+#' R -e "breaktime::timer()"
+#' ```
+#'
+#' The default arguments to `timer()` match those recommended by the
 #'
 #' `pomodoro()` is an alias with defaults that match the recommended fixed times
 #' of the [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique):
 #' 25 minute working sessions, 5 minute breaks and 20 minute long breaks.
+#'
+#' @source
+#' Inspired by the [Flowtime Technique](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
+#' by [Urgent Pigeon](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
+#' and the [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique)
+#' by [Francesco Cirillo](https://francescocirillo.com/pages/francesco-cirillo).
 #'
 #' @param work_time `[numeric(1)]`\cr
 #'   The length of time for each working session in minutes.
