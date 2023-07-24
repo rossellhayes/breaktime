@@ -30,8 +30,11 @@ breaktime_units <- c(
   "millennia"
 )
 
+# @staticimports pkg:stringstatic
+#  str_remove
+
 normalize_units <- function(units) {
-  normalized_units <- sub("s$", "", units)
+  normalized_units <- str_remove(units, "s$")
 
   aliases <- c(
     "minutes" = "m",

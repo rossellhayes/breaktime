@@ -7,7 +7,7 @@ as.breaktime_duration <- function(x) {
 }
 
 # @staticimports pkg:stringstatic
-#  str_pad str_replace
+#  str_pad str_remove str_replace
 
 #' @export
 as.character.breaktime_duration <- function(x, digits = 0, ...) {
@@ -21,7 +21,7 @@ as.character.breaktime_duration <- function(x, digits = 0, ...) {
   if (digits > 0) {
     remainder <- x %% 1
     remainder <- trunc(remainder, digits = digits)
-    remainder <- str_replace(remainder, "^0", "")
+    remainder <- str_remove(remainder, "^0")
     remainder <- str_pad(remainder, digits + 1, side = "right", pad = "0")
   } else {
     remainder <- rep("", length(x))
