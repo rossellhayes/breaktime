@@ -8,7 +8,7 @@ get_key_rstudio <- function(block = TRUE) {
       1
     )
 
-    if (key != "") {
+    if (nzchar(key)) {
       rstudioapi::sendToConsole("", execute = FALSE)
       return(tolower(key))
     }
