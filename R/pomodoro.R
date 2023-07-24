@@ -139,12 +139,17 @@ Pomodoro <- R6::R6Class(
     },
 
     print = function() {
-      private$print_header()
+      if (!rlang::is_interactive()) {
+        private$print_header()
+        return(cli::cli_text("{self$status} {self$timepiece$format()}"))
+      }
 
       old_option <- options("cli.progress_show_after" = 0)
       on.exit(options(old_option), add = TRUE)
 
       private$get_key <- determine_get_key_method()
+
+      private$print_header()
 
       cli::cli_progress_message(
         "{self$status} {self$timepiece$format()}"
@@ -207,12 +212,15 @@ Pomodoro <- R6::R6Class(
 
     print_header = function() {
       cli::cli_h1(private$headline)
-      cli::cli_text(
-        "Press {.key b} to start or end a break, ",
-        "{.key p} to pause, ",
-        "{.key r} to restart this session, ",
-        "or {.key esc} to quit."
-      )
+
+      if (rlang::is_interactive()) {
+        cli::cli_text(
+          "Press {.key b} to start or end a break, ",
+          "{.key p} to pause, ",
+          "{.key r} to restart this session, ",
+          "or {.key esc} to quit."
+        )
+      }
     },
 
     initialize_colors = function(start_color, end_color) {
