@@ -4,9 +4,11 @@
 \name{breaktime-package}
 \alias{breaktime}
 \alias{breaktime-package}
-\title{breaktime: Interactive Work Timer}
+\title{breaktime: Interactive Timers}
 \description{
-What the package does (one paragraph).
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Provides interactive timers that work in the console. Includes a timer, stopwatch, Pomodoro timer, and a work timer that uses an original method.
 }
 \seealso{
 Useful links:
@@ -18,6 +20,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Alexander Rossell Hayes \email{alexander@rossellhayes.com} (\href{https://orcid.org/0000-0001-9412-0457}{ORCID}) [copyright holder]
+
+Other contributors:
+\itemize{
+  \item Flavia Rossell Hayes [illustrator]
+}
 
 }
 \keyword{internal2}

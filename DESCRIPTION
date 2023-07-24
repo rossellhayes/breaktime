@@ -1,18 +1,24 @@
 Package: breaktime
-Title: Interactive Work Timer
+Title: Interactive Timers
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R: c(
     person("Alexander", "Rossell Hayes", , "alexander@rossellhayes.com", role = c("aut", "cre", "cph"),
-           comment = c(ORCID = "0000-0001-9412-0457"))
-Description: What the package does (one paragraph).
+           comment = c(ORCID = "0000-0001-9412-0457")),
+    person("Flavia", "Rossell Hayes", role = "ill")
+  )
+Description: Provides interactive timers that work in the console.
+    Includes a timer, stopwatch, Pomodoro timer, and a work timer that
+    uses an original method.
 License: MIT + file LICENSE
 URL: https://github.com/rossellhayes/breaktime
 BugReports: https://github.com/rossellhayes/breaktime/issues
 Imports: 
     beepr,
     cli,
+    lubridate,
     R6,
-    rlang
+    rlang,
+    utils
 Suggests: 
     keypress,
     rstudioapi,
@@ -20,4 +26,4 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

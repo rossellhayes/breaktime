@@ -1,0 +1,40 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# breaktime <img src="man/figures/logo.png?raw=TRUE" align="right" height="138" />
+
+<!-- badges: start -->
+`r badger::badge_github_version(color = "brightgreen")`
+`r badger::badge_lifecycle("experimental")`
+`r badger::badge_license("MIT", color = "blueviolet")`
+<!-- badges: end -->
+
+## Installation
+
+You can install the [development version of **breaktime**](https://github.com/rossellhayes/breaktime) from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pkg_install("rossellhayes/breaktime")
+```
+
+## Overview
+
+Provides interactive timers that work in the console.
+Includes a timer, stopwatch, [Pomodoro timer](https://francescocirillo.com/products/the-pomodoro-technique), and a work timer that uses an original method.
+
+---
+
+Hex sticker image by Flavia Rossell Hayes.

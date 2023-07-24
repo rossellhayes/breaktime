@@ -1,94 +1,82 @@
 #' Start a timer
 #'
-#' @description
-#' `timer()` creates an interactive timer in your R session.
-#' I recommend you don't use `timer()` in your current R session,
+#' Creates an interactive timer in your R session.
+#' I recommend you don't call this function in your current R session,
 #' as it will block the console.
 #' You may consider running it from the command line in a new terminal window with
 #' ```
 #' R -e "breaktime::timer()"
 #' ```
 #'
-#' The default arguments to `timer()` match those recommended by the
+#' @inheritParams breaktime
+#' @param duration `[numeric(1)]`\cr
+#'   The length of the timer.
 #'
-#' `pomodoro()` is an alias with defaults that match the recommended fixed times
-#' of the [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique):
-#' 25 minute working sessions, 5 minute breaks and 20 minute long breaks.
-#'
-#' @source
-#' Inspired by the [Flowtime Technique](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
-#' by [Urgent Pigeon](https://medium.com/@UrgentPigeon/the-flowtime-technique-7685101bd191)
-#' and the [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique)
-#' by [Francesco Cirillo](https://francescocirillo.com/pages/francesco-cirillo).
-#'
-#' @param work_time `[numeric(1)]`\cr
-#'   The length of time for each working session in minutes.
-#'   Defaults to 25 minutes.
-#' @param break_time `[numeric(1)]`\cr
-#'   The length of time for each short break in minutes.
-#'   If [`NULL`], the break time will be one-fifth of the length of the previous
-#'   working session.
-#' @param long_break_time `[numeric(1)]`\cr
-#'   The length of time for each long break in minutes.
-#'   Long breaks occur every fourth break.
-#'   If [`NULL`], the long break time will be one-fifth of the length of the
-#'   previous working session, plus the length of the previous three short breaks.
-#' @param sound `[numeric(1)]` or `[character(1)]`
-#'   The sound played by [beepr::beep()] when a session ends.
-#'   See [beepr::beep()] for possible values.
-#'
-#'   If [`NULL`], sound is disabled.
-#'
-#'   If you do not interact with `breaktime` after a session has ended,
-#'   the sound will play again each time one-fifth of the target time passes
-#'   (for example, if a session lasts 25 minutes,
-#'   a reminder sound will play every 5 minutes after the session ends).
-#' @param start_color,end_color `[character(1)]`\cr
-#'   Colors used to display the time.
-#'   The time is displayed in `start_color` when there is time remaining in the
-#'   current session, and in `end_color` when the current session has expired.
-#'   Color specifications are handled by [cli::make_ansi_style()].
-#'
-#' @return Invisibly returns an [R6][R6::R6] object of class `Timer`
+#' @return Invisibly returns an [R6][R6::R6] object of class `Timer`.
 #' @export
 timer <- function(
-  work_time = 25,
-  break_time = NULL,
-  long_break_time = NULL,
-  sound = "ping",
+  duration,
   start_color = "green",
-  end_color = "red"
+  end_color = "red",
+  sound = "ping",
+  units = "minutes"
 ) {
-  new_timer(
-    work_time = work_time,
-    break_time = break_time,
-    long_break_time = long_break_time,
-    sound = sound,
+  try_resume("timer")
+
+  breaktime_env$timer <- Timer$new(
+    duration = duration,
     start_color = start_color,
-    end_color = end_color
+    end_color = end_color,
+    sound = sound,
+    units = units
   )
+
+  breaktime_env$timer
 }
 
-#' @rdname timer
-#' @export
-pomodoro <- function(
-  work_time = 25,
-  break_time = 5,
-  long_break_time = 20,
-  sound = "ping",
-  start_color = "green",
-  end_color = "red"
-) {
-  new_timer(
-    work_time = work_time,
-    break_time = break_time,
-    long_break_time = long_break_time,
-    sound = sound,
-    start_color = start_color,
-    end_color = end_color
-  )
-}
+Timer <- R6::R6Class(
+  "Timer",
+  inherit = Stopwatch,
 
-new_timer <- function(...) {
-  invisible(Timer$new(...))
-}
+  public = list(
+    timer_duration = NULL,
+
+    initialize = function(
+      duration,
+      start_color = "green",
+      end_color = "red",
+      sound = "ping",
+      units = "minutes"
+    ) {
+      self$start_time <- Sys.time()
+      self$timer_duration <- in_seconds(duration, units)
+      private$initialize_colors(start_color, end_color)
+      self$sound <- sound
+    },
+
+    format = function() {
+      if (
+        self$complete &&
+          self$elapsed_time - private$last_chime > self$timer_duration / 5
+      ) {
+        private$chime()
+      }
+
+      self$color(self$remaining_time)
+    }
+  ),
+
+  active = list(
+    remaining_time = function() {
+      as.breaktime_duration(self$timer_duration - self$elapsed_time)
+    },
+
+    complete = function() {
+      self$elapsed_time >= self$timer_duration
+    }
+  ),
+
+  private = list(
+    headline = "{if (cli::is_utf8_output()) '\U23F2\UFE0F '}timer"
+  )
+)
