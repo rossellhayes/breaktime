@@ -59,6 +59,7 @@ Timepiece <- R6::R6Class(
         if (nzchar(key)) {
           switch(
             key,
+            escape = break,
             p = self$pause(),
             r = self$reset()
           )

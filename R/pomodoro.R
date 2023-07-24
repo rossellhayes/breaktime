@@ -163,6 +163,7 @@ Pomodoro <- R6::R6Class(
         if (nzchar(key)) {
           switch(
             key,
+            escape = break,
             p = self$timepiece$pause(),
             b = self$next_session(),
             r = self$timepiece$reset()
