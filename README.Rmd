@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 `r badger::badge_github_version(color = "brightgreen")`
 `r badger::badge_lifecycle("experimental")`
 `r badger::badge_license("MIT", color = "blueviolet")`
+`r badger::badge_github_actions()`
 <!-- badges: end -->
 
 ## Installation

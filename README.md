@@ -9,6 +9,8 @@
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 MIT](https://img.shields.io/badge/license-MIT-blueviolet.svg)](https://cran.r-project.org/web/licenses/MIT)
+[![R build
+status](https://github.com/rossellhayes/breaktime/workflows/R-CMD-check/badge.svg)](https://github.com/rossellhayes/breaktime/actions)
 <!-- badges: end -->
 
 ## Installation
