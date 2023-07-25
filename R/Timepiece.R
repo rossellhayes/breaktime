@@ -1,3 +1,5 @@
+#' @importFrom R6 R6Class
+#' @importFrom beepr beep
 Timepiece <- R6::R6Class(
   "Timepiece",
 

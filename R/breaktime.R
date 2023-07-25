@@ -75,6 +75,8 @@ breaktime <- function(
   breaktime_env$breaktime
 }
 
+#' @importFrom R6 R6Class
+#' @importFrom utils tail
 BreakTime <- R6::R6Class(
   "BreakTime",
   inherit = Pomodoro,

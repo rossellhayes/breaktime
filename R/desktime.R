@@ -44,6 +44,7 @@ desktime <- function(
   breaktime_env$desktime
 }
 
+#' @importFrom R6 R6Class
 DeskTime <- R6::R6Class(
   "DeskTime",
   inherit = Pomodoro,

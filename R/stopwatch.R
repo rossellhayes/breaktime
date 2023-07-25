@@ -36,6 +36,7 @@ stopwatch <- function(
   breaktime_env$stopwatch
 }
 
+#' @importFrom R6 R6Class
 Stopwatch <- R6::R6Class(
   "Stopwatch",
   inherit = Timepiece,

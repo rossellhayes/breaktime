@@ -51,7 +51,7 @@ pomodoro <- function(
 
 # @staticimports pkg:stringstatic
 #  str_pad str_width
-
+#' @importFrom R6 R6Class
 Pomodoro <- R6::R6Class(
   "Pomodoro",
 

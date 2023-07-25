@@ -15,7 +15,6 @@ BugReports: https://github.com/rossellhayes/breaktime/issues
 Imports: 
     beepr,
     cli,
-    lubridate,
     R6,
     rlang,
     utils
