@@ -2,8 +2,8 @@
 % Please edit documentation in R/breaktime-package.R
 \docType{package}
 \name{breaktime-package}
-\alias{breaktime}
 \alias{breaktime-package}
+\alias{_PACKAGE}
 \title{breaktime: Interactive Timers}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
@@ -27,4 +27,4 @@ Other contributors:
 }
 
 }
-\keyword{internal2}
+\keyword{internal}

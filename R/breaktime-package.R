@@ -1,4 +1,5 @@
-#' @keywords internal2
+#' @keywords internal
+#' @aliases breaktime-package
 "_PACKAGE"
 
 ## usethis namespace: start
