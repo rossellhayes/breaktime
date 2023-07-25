@@ -13,6 +13,7 @@ Provides interactive timers that work in the console. Includes a timer, stopwatc
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://pkg.rossellhayes.com/breaktime/}
   \item \url{https://github.com/rossellhayes/breaktime}
   \item Report bugs at \url{https://github.com/rossellhayes/breaktime/issues}
 }

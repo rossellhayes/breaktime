@@ -10,7 +10,8 @@ Description: Provides interactive timers that work in the console.
     Includes a timer, stopwatch, Pomodoro timer, and a work timer that
     uses an original method.
 License: MIT + file LICENSE
-URL: https://github.com/rossellhayes/breaktime
+URL: https://pkg.rossellhayes.com/breaktime/,
+    https://github.com/rossellhayes/breaktime
 BugReports: https://github.com/rossellhayes/breaktime/issues
 Imports: 
     beepr,
